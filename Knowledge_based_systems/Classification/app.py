@@ -8,7 +8,7 @@ import joblib
 model = joblib.load('accident_severity_model.joblib')
 class_names = joblib.load('class_names.joblib')
 
-# Set page config
+# Set page configurations
 st.set_page_config(
     page_title="Accident Severity Predictor",
     page_icon="🚗",
