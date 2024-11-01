@@ -32,14 +32,12 @@ with col2:
 
 # Add predict button
 if st.button("Predict Severity"):
-    # Prepare input data
+
     input_data = np.array([[hour, minute]])
     
     # Make prediction
     prediction = model.predict(input_data)
     probabilities = model.predict_proba(input_data)[0]
-    
-    # Show results
     st.subheader("Prediction Results:")
     st.write(f"Predicted Severity Level: {class_names[prediction[0]]}")
     
@@ -53,7 +51,6 @@ if st.button("Predict Severity"):
     # Create bar chart
     st.bar_chart(prob_df.set_index('Severity Level'))
 
-# Add model information in sidebar
 st.sidebar.header("About the Model")
 st.sidebar.info("""
 This model predicts accident severity based on historical accident data in Kenya.
