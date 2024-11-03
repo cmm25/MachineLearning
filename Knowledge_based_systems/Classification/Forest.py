@@ -10,7 +10,7 @@ class_names = joblib.load('class_names.joblib')
 
 # Set page configurations
 st.set_page_config(
-    page_title="Accident Severity Predictor",
+    page_title="Accident Severity Predictor Random Forest",
     page_icon="🚗",
     layout="wide"
 )
@@ -66,6 +66,6 @@ Severity Levels:
 """)
 
 # Add model metrics
-accuracy = 0.42 # THIS IS INFLUENCED BY THE REAL MODEL ACCURACY 
+accuracy = 0.39 
 st.sidebar.header("Model Performance")
 st.sidebar.metric("Model Accuracy", f"{accuracy:.2%}")
