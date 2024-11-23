@@ -130,6 +130,6 @@ This model predicts accident severity based on historical accident data in Kenya
 
 # Model Performance Metrics
 st.sidebar.header("📊 **Model Performance**")
-accuracy = model_params.get('accuracy', 0.08) 
+accuracy = model_params.get('accuracy', 0.1313) 
 st.sidebar.metric("✅ **Model Accuracy**", f"{accuracy:.2%}")
 
