@@ -66,6 +66,6 @@ Severity Levels:
 """)
 
 # Add model metrics
-accuracy = 0.39 
+accuracy = 0.56
 st.sidebar.header("Model Performance")
 st.sidebar.metric("Model Accuracy", f"{accuracy:.2%}")
