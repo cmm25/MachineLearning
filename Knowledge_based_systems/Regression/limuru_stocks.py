@@ -14,7 +14,7 @@ st.set_page_config(
 
 @st.cache_resource
 def load_model():
-    model_data = joblib.load('limuru_stock_prediction_model.pkl')
+    model_data = joblib.load('Knowledge_based_systems/Regression/limuru_stock_prediction_model.pkl')
     return model_data['model'], model_data['metrics']
 
 def main():
