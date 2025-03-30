@@ -59,7 +59,6 @@ class TextAnalyzer:
         Returns:
             Dictionary with analysis results
         """
-        # Check if file exists
         if not os.path.exists(image_path):
             self.logger.error(f"Image not found: {image_path}")
             return {"error": "Image not found"}
@@ -126,16 +125,6 @@ class TextAnalyzer:
             return {"error": str(e)}
     
     def process_directory(self, directory_path, save_visualization=True):
-        """
-        Process all images in a directory
-        
-        Args:
-            directory_path: Path to directory containing images
-            save_visualization: Whether to save visualization images
-            
-        Returns:
-            List of results for each image
-        """
         if not os.path.isdir(directory_path):
             self.logger.error(f"Directory not found: {directory_path}")
             return {"error": "Directory not found"}
@@ -148,7 +137,7 @@ class TextAnalyzer:
         for ext in image_extensions:
             image_files.extend(
                 [os.path.join(directory_path, f) for f in os.listdir(directory_path) 
-                 if f.lower().endswith(ext)]
+                    if f.lower().endswith(ext)]
             )
         
         self.logger.info(f"Found {len(image_files)} images in {directory_path}")
@@ -161,23 +150,12 @@ class TextAnalyzer:
         return results
     
     def save_results_to_txt(self, results, output_path=None):
-        """
-        Save analysis results to a text file
-        
-        Args:
-            results: Results from process_image or process_directory
-            output_path: Path to output file (optional)
-            
-        Returns:
-            Path to output file
-        """
         if output_path is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             output_path = self.path_config.get_output_path(f"results_{timestamp}.txt")
         
         with open(output_path, 'w', encoding='utf-8') as f:
             if isinstance(results, list):
-                # Multiple image results
                 f.write(f"Text Analysis Results - {len(results)} images\n")
                 f.write("=" * 50 + "\n\n")
                 

@@ -1,6 +1,4 @@
-class PreprocessingConfig:
-    """Configuration for image preprocessing parameters"""
-    
+class PreprocessingConfig:    
     def __init__(self):
         # Gaussian blur parameters
         self.use_gaussian = True
@@ -14,9 +12,7 @@ class PreprocessingConfig:
         
         # Binarization parameters
         self.use_binarization = True
-        self.binarization_method = 'adaptive'  # 'adaptive' or 'otsu'
+        self.binarization_method = 'adaptive'  
         self.adaptive_block_size = 11
         self.adaptive_c = 2
-        
-        # Skew correction parameters
         self.correct_skew = True

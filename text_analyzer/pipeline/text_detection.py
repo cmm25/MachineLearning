@@ -50,8 +50,7 @@ class TextDetector:
             List of bounding boxes (x, y, w, h)
         """
         orig_h, orig_w = image.shape[:2]
-        
-        # EAST requires dimensions to be multiples of 32
+
         (new_w, new_h) = (320, 320)
         ratio_w = orig_w / float(new_w)
         ratio_h = orig_h / float(new_h)
@@ -61,7 +60,7 @@ class TextDetector:
         
         # Create blob from image
         blob = cv2.dnn.blobFromImage(resized, 1.0, (new_w, new_h),
-                                     (123.68, 116.78, 103.94), swapRB=True, crop=False)
+                                        (123.68, 116.78, 103.94), swapRB=True, crop=False)
         
         # Load the pre-trained EAST model
         net = self._load_east_model()
@@ -70,8 +69,8 @@ class TextDetector:
         
         # Define output layer names for EAST
         layer_names = [
-            "feature_fusion/Conv_7/Sigmoid",  # Confidence scores
-            "feature_fusion/concat_3"         # Geometry (bounding boxes)
+            "feature_fusion/Conv_7/Sigmoid",  
+            "feature_fusion/concat_3"        
         ]
         
         # Forward pass
@@ -137,8 +136,7 @@ class TextDetector:
                 angle = angles_data[x]
                 cos = np.cos(angle)
                 sin = np.sin(angle)
-                
-                # Calculate dimensions and center of bounding box
+
                 h = x_data0[x] + x_data2[x]
                 w = x_data1[x] + x_data3[x]
                 
@@ -154,16 +152,7 @@ class TextDetector:
         return (rects, confidences)
     
     def _detect_text_contours(self, image):
-        """
-        Alternative text detection using contour analysis
-        Used as fallback when EAST model is not available
-        
-        Args:
-            image: Input image (preprocessed)
-            
-        Returns:
-            List of bounding boxes (x, y, w, h)
-        """
+
         self.logger.info("Using contour-based text detection")
         
         # If the image is not already binary, convert it
@@ -171,7 +160,7 @@ class TextDetector:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if len(image.shape) > 2 else image
             _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
         else:
-            # Ensure black text on white background for contour detection
+
             if cv2.countNonZero(image) > (image.shape[0] * image.shape[1] / 2):
                 binary = cv2.bitwise_not(image)
             else:
@@ -193,22 +182,12 @@ class TextDetector:
             aspect_ratio = w / float(h)
             area = w * h
             
-            # Typical text has aspect ratio > 1 and reasonable size
             if 0.2 < aspect_ratio < 15 and area > 100:
                 boxes.append((x, y, w, h))
         
         return boxes
     
     def detect(self, image):
-        """
-        Detect text regions in an image
-        
-        Args:
-            image: Input image (can be pre-processed or original)
-            
-        Returns:
-            List of bounding boxes (x, y, w, h)
-        """
         self.logger.info("Detecting text regions")
         
         # Try using EAST detector first

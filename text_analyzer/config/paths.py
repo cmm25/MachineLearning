@@ -1,9 +1,7 @@
 import os
 from pathlib import Path
 
-class PathConfig:
-    """Configuration for project paths"""
-    
+class PathConfig:    
     def __init__(self):
         # Get the project root directory
         self.root_dir = Path(__file__).parent.parent.absolute()
