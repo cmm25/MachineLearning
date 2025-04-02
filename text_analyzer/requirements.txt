@@ -1,0 +1,22 @@
+# Core dependencies
+numpy>=1.19.0
+opencv-python>=4.5.0
+Pillow>=8.0.0
+matplotlib>=3.3.0
+streamlit>=1.8.0
+
+# OCR engine
+easyocr>=1.6.0
+PyTorch>=1.7.0
+torchvision>=0.8.0
+
+# Language detection
+langdetect>=1.0.9
+
+# Image processing utilities
+scikit-image>=0.17.2
+
+# Additional dependencies
+python-bidi>=0.4.2  # Required by easyOCR for right-to-left languages
+pyclipper>=1.2.0  # Required by easyOCR
+shapely>=1.7.1  # Required by easyOCR
