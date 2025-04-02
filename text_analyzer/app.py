@@ -112,7 +112,7 @@ if input_method == "Upload Image":
             elif len(img_array.shape) == 3 and img_array.shape[2] == 4:     
                     img_array = cv2.cvtColor(img_array, cv2.COLOR_RGBA2BGR)
 
-            st.image(pil_image, caption="Uploaded Image", use_column_width=True)
+            st.image(pil_image, caption="Uploaded Image", use_container_width=True)
         except Exception as e:
             st.error(f"Error loading uploaded image: {e}")
             img_array = None
@@ -150,7 +150,7 @@ if img_array is not None:
             with col_orig:
                 st.image(cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB), 
                             caption="Original Image", 
-                            use_column_width=True)
+                            use_container_width=True)
 
             preprocessed_image = preprocessor.process(img_array)
             
@@ -162,7 +162,7 @@ if img_array is not None:
                 
                 st.image(disp_image, 
                             caption="Preprocessed Image", 
-                            use_column_width=True)
+                            use_container_width=True)
                 
                 preprocessing_time = time.time() - start_time
                 st.text(f"Preprocessing completed in {preprocessing_time:.2f} seconds")
@@ -176,7 +176,7 @@ if img_array is not None:
             
             st.image(cv2.cvtColor(detection_vis, cv2.COLOR_BGR2RGB), 
                         caption=f"Detected {len(boxes)} Text Regions", 
-                        use_column_width=True)
+                        use_container_width=True)
                 
             detection_time = time.time() - detection_start
             st.text(f"Text detection completed in {detection_time:.2f} seconds")
@@ -211,7 +211,7 @@ if img_array is not None:
             # Display recognition results
             st.image(cv2.cvtColor(ocr_vis, cv2.COLOR_BGR2RGB), 
                         caption="Text Recognition Results", 
-                        use_column_width=True)
+                        use_container_width=True)
             
             recognition_time = time.time() - recognition_start
             st.text(f"Text recognition completed in {recognition_time:.2f} seconds")
@@ -312,7 +312,7 @@ if img_array is not None:
                 
                 with filter_col1:
                     blur = cv2.GaussianBlur(gray_img, (5, 5), 0)
-                    st.image(blur, caption="Gaussian Blur", use_column_width=True)
+                    st.image(blur, caption="Gaussian Blur", use_container_width=True)
                 
                 with filter_col2:
                     # Apply Sobel edge detector
@@ -320,12 +320,12 @@ if img_array is not None:
                     sobely = cv2.Sobel(gray_img, cv2.CV_64F, 0, 1, ksize=3)
                     sobel = cv2.magnitude(sobelx, sobely)
                     sobel = cv2.normalize(sobel, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
-                    st.image(sobel, caption="Sobel Edge Detection", use_column_width=True)
+                    st.image(sobel, caption="Sobel Edge Detection", use_container_width=True)
                 
                 with filter_col3:
                     # Apply thresholding
                     _, thresh = cv2.threshold(gray_img, 127, 255, cv2.THRESH_BINARY)
-                    st.image(thresh, caption="Binary Thresholding", use_column_width=True)
+                    st.image(thresh, caption="Binary Thresholding", use_container_width=True)
                 
                 st.markdown("These filtering techniques are common in Digital Image Processing to enhance features for better text detection and recognition.")
             
