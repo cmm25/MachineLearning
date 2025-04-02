@@ -7,7 +7,7 @@ streamlit>=1.8.0
 
 # OCR engine
 easyocr>=1.6.0
-PyTorch>=1.7.0
+torch>=1.7.0
 torchvision>=0.8.0
 
 # Language detection
